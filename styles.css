@@ -11,6 +11,11 @@ body {
     color: #333;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
+    /* Improved touch scrolling for mobile */
+    -webkit-overflow-scrolling: touch;
+    /* Prevent text size adjust on mobile */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
 }
 
 /* Page Management */
@@ -75,6 +80,14 @@ body {
     border-radius: 6px;
     font-size: 16px;
     transition: border-color 0.3s ease;
+    /* Improved mobile input styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Prevent zoom on iOS */
+    font-size: 16px;
+    /* Better touch targets */
+    min-height: 44px;
 }
 
 .form-control:focus, input:focus, select:focus {
@@ -95,6 +108,15 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
+    /* Improved touch targets for mobile */
+    min-height: 44px;
+    /* Prevent user selection on buttons */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Better touch feedback */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary {
@@ -367,57 +389,322 @@ body {
     border: 1px solid #c3e6cb;
 }
 
-/* Responsive Design */
+/* Enhanced Mobile Responsive Design */
 @media (max-width: 768px) {
     .header-content {
-        padding: 15px 20px;
+        padding: 12px 15px;
         flex-direction: column;
-        gap: 15px;
+        gap: 12px;
+    }
+
+    .header h1 {
+        font-size: 1.6em;
+    }
+
+    .user-info {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
     }
 
     .main-content {
-        padding: 20px 15px;
+        padding: 15px 10px;
     }
 
     .dashboard-section {
-        padding: 20px;
+        padding: 15px;
     }
 
     .admin-controls, .super-admin-controls {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 15px;
     }
 
     .user-card {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .user-info-card {
+        align-items: center;
+    }
+
+    .user-actions {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .user-actions .btn {
+        min-width: 100px;
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .points-value {
+        font-size: 2.8em;
+    }
+
+    .points-display {
+        padding: 25px 15px;
+    }
+
+    /* Form improvements for mobile */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control, input[type="text"], input[type="password"], input[type="number"], select {
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 14px 12px;
+    }
+
+    /* Button improvements */
+    .btn {
+        padding: 14px 20px;
+        font-size: 16px;
+        min-height: 48px; /* Touch-friendly size */
+    }
+
+    /* Admin header mobile */
+    .admin-header {
         flex-direction: column;
         gap: 15px;
         text-align: center;
     }
 
-    .user-actions {
+    .admin-actions-buttons {
         justify-content: center;
+        flex-wrap: wrap;
     }
 
-    .points-value {
-        font-size: 3em;
+    .admin-actions-buttons .btn {
+        min-width: 120px;
+    }
+
+    /* User action buttons mobile */
+    .user-actions-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .user-actions-buttons .btn {
+        width: 100%;
+        min-width: unset;
+    }
+
+    /* Points management mobile */
+    .points-management, .admin-management {
+        padding: 20px 15px;
+    }
+
+    /* Users list mobile */
+    .users-list, .admins-list {
+        padding: 20px 15px;
+    }
+
+    /* Role badges mobile */
+    .role-user, .role-admin, .role-superadmin, .role-supervisor {
+        font-size: 0.75em;
+        padding: 3px 6px;
+    }
+
+    /* User info improvements for mobile */
+    .user-name {
+        font-size: 1em;
+        margin-bottom: 4px;
+    }
+
+    .user-role {
+        margin-bottom: 4px;
+    }
+
+    .user-points {
+        font-size: 1em;
+        margin-bottom: 4px;
+    }
+
+    .user-login {
+        font-size: 0.85em;
+        margin-bottom: 2px;
+    }
+
+    .user-password {
+        font-size: 0.8em;
+        padding: 4px 8px;
+        word-break: break-all;
     }
 }
 
 @media (max-width: 480px) {
     .login-form {
-        padding: 30px 20px;
+        padding: 25px 15px;
+        margin: 15px;
+    }
+
+    .login-form h1 {
+        font-size: 2em;
+    }
+
+    .login-form h2 {
+        font-size: 1em;
+        margin-bottom: 25px;
     }
 
     .header h1 {
-        font-size: 1.5em;
+        font-size: 1.4em;
     }
 
     .points-display {
-        padding: 30px 20px;
+        padding: 20px 15px;
+        margin-bottom: 20px;
     }
 
     .points-value {
+        font-size: 2.2em;
+    }
+
+    .points-label {
+        font-size: 1em;
+    }
+
+    .dashboard-section {
+        padding: 12px;
+    }
+
+    .dashboard-section h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Smaller spacing for very small screens */
+    .form-group {
+        margin-bottom: 12px;
+    }
+
+    .main-content {
+        padding: 10px 8px;
+    }
+
+    /* Super compact user cards */
+    .user-card {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .user-name {
+        font-size: 1em;
+    }
+
+    .user-role {
+        font-size: 0.85em;
+    }
+
+    .user-points {
+        font-size: 0.95em;
+    }
+
+    /* Compact buttons for small screens */
+    .btn {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    .user-actions .btn {
+        min-width: 80px;
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    /* Improved form layout for very small screens */
+    .login-form {
+        max-width: 100%;
+        border-radius: 8px;
+    }
+
+    /* Better select styling for mobile */
+    select {
+        background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23666" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 12px;
+        padding-right: 40px;
+    }
+}
+
+/* Landscape orientation optimizations for tablets */
+@media (max-width: 768px) and (orientation: landscape) {
+    .header-content {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 15px;
+    }
+    
+    .user-info {
+        flex-direction: row;
+        gap: 15px;
+    }
+    
+    .points-display {
+        padding: 20px;
+    }
+    
+    .points-value {
         font-size: 2.5em;
+    }
+    
+    .admin-header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .user-actions-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .user-actions-buttons .btn {
+        width: auto;
+        min-width: 140px;
+    }
+}
+
+/* Extra small screens (very small phones) */
+@media (max-width: 360px) {
+    .dashboard-section {
+        padding: 10px;
+    }
+    
+    .main-content {
+        padding: 8px 5px;
+    }
+    
+    .login-form {
+        padding: 20px 12px;
+        margin: 10px;
+    }
+    
+    .points-display {
+        padding: 15px 10px;
+    }
+    
+    .points-value {
+        font-size: 2em;
+    }
+    
+    .btn {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
+    .user-card {
+        padding: 10px;
+    }
+    
+    .form-control, input, select {
+        padding: 12px 10px;
     }
 }
 
@@ -571,6 +858,8 @@ body {
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 0.8em;
+    white-space: nowrap;
+    display: inline-block;
 }
 
 .role-admin {
@@ -579,6 +868,8 @@ body {
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 0.8em;
+    white-space: nowrap;
+    display: inline-block;
 }
 
 .role-superadmin {
@@ -587,6 +878,18 @@ body {
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 0.8em;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.role-supervisor {
+    background: #fd7e14;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    white-space: nowrap;
+    display: inline-block;
 }
 
 /* Button variations */
@@ -606,21 +909,66 @@ body {
     .users-controls {
         flex-direction: column;
         align-items: stretch;
+        gap: 12px;
+    }
+    
+    .users-controls input[type="text"] {
+        min-width: unset;
+        width: 100%;
+    }
+    
+    .supervisor-controls {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .supervisor-controls .btn {
+        width: 100%;
+        padding: 12px 16px;
     }
     
     .pagination-controls {
         justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .pagination-controls button {
+        min-width: 100px;
+        padding: 10px 12px;
+    }
+    
+    #pageInfo {
+        order: -1;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 8px;
     }
     
     .modal-content {
-        margin: 2% auto;
-        width: 95%;
+        margin: 5px auto;
+        width: calc(100% - 10px);
+        max-height: calc(100vh - 10px);
     }
     
     .modal-header,
     .modal-body,
     .modal-footer {
-        padding: 15px 20px;
+        padding: 15px;
+    }
+    
+    .modal-header h3 {
+        font-size: 1.2em;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .modal-footer .btn {
+        width: 100%;
+        min-width: unset;
     }
 }
 
@@ -789,13 +1137,6 @@ body {
 }
 
 /* Role-specific styles updates */
-.role-supervisor {
-    background: #fd7e14;
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.8em;
-}
 
 /* Modern Notification Modal Styles */
 .notification-modal {
@@ -936,7 +1277,8 @@ body {
 @media (max-width: 768px) {
     .supervisor-controls {
         width: 100%;
-        justify-content: space-between;
+        flex-direction: column;
+        gap: 8px;
     }
     
     .users-controls {
@@ -947,33 +1289,134 @@ body {
     .notification-modal {
         margin: 10px;
         width: calc(100% - 20px);
+        max-height: calc(100vh - 20px);
     }
     
-    .notification-header,
-    .notification-body,
+    .notification-header {
+        padding: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .notification-header h3 {
+        font-size: 1.1em;
+    }
+    
+    .notification-body {
+        padding: 20px 15px;
+    }
+    
+    .notification-body p {
+        font-size: 1em;
+        line-height: 1.4;
+    }
+    
     .notification-footer {
-        padding: 15px 20px;
+        padding: 12px 15px;
+    }
+    
+    .notification-footer .btn {
+        width: 100%;
+        min-width: unset;
     }
 }
 
 @media (max-width: 768px) {
+    .shop-section {
+        padding: 20px 15px;
+        margin-top: 20px;
+    }
+    
+    .shop-section h3 {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+    }
+    
     .shop-grid {
         grid-template-columns: 1fr;
+        gap: 12px;
     }
     
     .shop-item {
         flex-direction: column;
         text-align: center;
-        gap: 15px;
+        gap: 12px;
+        padding: 15px;
+    }
+    
+    .shop-item-info h4 {
+        font-size: 1em;
+        margin-bottom: 8px;
+    }
+    
+    .shop-item-price {
+        font-size: 0.9em;
+        margin-bottom: 8px;
+    }
+    
+    .btn-shop {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 16px;
+        min-height: 48px;
+    }
+    
+    /* Orders mobile */
+    .orders-section {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .orders-section h3 {
+        font-size: 1.2em;
+        margin-bottom: 12px;
     }
     
     .order-item {
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
         text-align: center;
+        padding: 15px;
+    }
+    
+    .order-info {
+        width: 100%;
+    }
+    
+    .order-user {
+        font-size: 1em;
+        margin-bottom: 6px;
+    }
+    
+    .order-product {
+        font-size: 0.9em;
+        margin-bottom: 4px;
+    }
+    
+    .order-time {
+        font-size: 0.8em;
     }
     
     .order-actions {
         align-items: center;
+        width: 100%;
+    }
+    
+    .order-warning {
+        max-width: 100%;
+        font-size: 0.8em;
+        padding: 6px 8px;
+        margin-bottom: 8px;
+    }
+    
+    .btn-fulfill {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 14px;
+        min-height: 44px;
+    }
+    
+    .empty-orders {
+        padding: 15px;
+        font-size: 0.9em;
     }
 }
