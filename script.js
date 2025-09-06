@@ -325,26 +325,32 @@ class PointsSystem {
         });
 
         document.getElementById('createUserBtn').addEventListener('click', async () => {
+            ym(104057165,'reachGoal','click createUserBtn');
             await this.handleCreateUser();
         });
 
         document.getElementById('exportReportBtn').addEventListener('click', async () => {
+            ym(104057165,'reachGoal','click exportReportBtn');
             await this.exportUsersReport();
         });
         
         document.getElementById('exportOrdersReportBtn').addEventListener('click', async () => {
+            ym(104057165,'reachGoal','click exportOrdersReportBtn');
             await this.exportOrdersReport();
         });
         
         document.getElementById('supervisorExportReportBtn').addEventListener('click', async () => {
+            ym(104057165,'reachGoal','click exportReportBtn');
             await this.exportUsersReport();
         });
         
         document.getElementById('supervisorExportOrdersReportBtn').addEventListener('click', async () => {
+            ym(104057165,'reachGoal','click exportOrdersReportBtn');
             await this.exportOrdersReport();
         });
         
         document.getElementById('supervisorCreateUserBtn').addEventListener('click', async () => {
+            ym(104057165,'reachGoal','click supervisorCreateUserBtn');
             await this.handleSupervisorCreateUser();
         });
 
