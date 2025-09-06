@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audiotele - Система управления Атэелькой</title>
+    <link rel="icon" type="image/x-icon" href="icon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="icon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Login Page -->
+        <div id="loginPage" class="page active">
+            <div class="login-container">
+                <div class="login-form">
+                    <h1>Атэелька</h1>
+                    <h2>Система управления Атэелькой</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="username">Логин:</label>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Пароль:</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Войти</button>
+                    </form>
+                    <div id="loginError" class="error-message" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboardPage" class="page">
+            <header class="header">
+                <div class="header-content">
+                    <h1>Атэелька</h1>
+                    <div class="user-info">
+                        <span id="currentUser"></span>
+                        <span id="currentRole"></span>
+                        <button id="logoutBtn" class="btn btn-secondary">Выйти</button>
+                    </div>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <div class="dashboard-container">
+                    <!-- User Dashboard -->
+                    <div id="userDashboard" class="dashboard-section">
+                        <h2>Моя Атэелька</h2>
+                        <div class="points-display">
+                            <span class="points-value" id="userPoints">1</span>
+                            <span class="points-label">Атэелька</span>
+                        </div>
+                        
+                        <!-- User Action Buttons -->
+                        <div class="user-actions-buttons">
+                            <button id="refreshPointsBtn" class="btn btn-primary">🔄 Обновить</button>
+                        </div>
+                        
+                        <!-- Shop Section for Users -->
+                        <div id="shopSection" class="shop-section">
+                            <h3>🛍️ Магазин</h3>
+                            <div class="shop-grid">
+                                <div class="shop-item">
+                                    <div class="shop-item-info">
+                                        <h4>🧢 Рекламная кепка</h4>
+                                        <p class="shop-item-price">27 Атэелька</p>
+                                    </div>
+                                    <button class="btn btn-shop" onclick="pointsSystem.buyItem('Рекламная кепка', 27)">Купить</button>
+                                </div>
+                                
+                                <div class="shop-item">
+                                    <div class="shop-item-info">
+                                        <h4>🏭 Рекламная панама</h4>
+                                        <p class="shop-item-price">46 Атэелька</p>
+                                    </div>
+                                    <button class="btn btn-shop" onclick="pointsSystem.buyItem('Рекламная панама', 46)">Купить</button>
+                                </div>
+                                
+                                <div class="shop-item">
+                                    <div class="shop-item-info">
+                                        <h4>🛍️ Рекламная сумка</h4>
+                                        <p class="shop-item-price">38 Атэелька</p>
+                                    </div>
+                                    <button class="btn btn-shop" onclick="pointsSystem.buyItem('Рекламная сумка', 38)">Купить</button>
+                                </div>
+                                
+                                <div class="shop-item">
+                                    <div class="shop-item-info">
+                                        <h4>✏️ Рекламная ручка</h4>
+                                        <p class="shop-item-price">3 Атэелька</p>
+                                    </div>
+                                    <button class="btn btn-shop" onclick="pointsSystem.buyItem('Рекламная ручка', 3)">Купить</button>
+                                </div>
+                                
+                                <div class="shop-item">
+                                    <div class="shop-item-info">
+                                        <h4>🍺 Рекламный термос</h4>
+                                        <p class="shop-item-price">65 Атэелька</p>
+                                    </div>
+                                    <button class="btn btn-shop" onclick="pointsSystem.buyItem('Рекламный термос', 65)">Купить</button>
+                                </div>
+                                
+                                <div class="shop-item">
+                                    <div class="shop-item-info">
+                                        <h4>🔑 Рекламный брелок</h4>
+                                        <p class="shop-item-price">8 Атэелька</p>
+                                    </div>
+                                    <button class="btn btn-shop" onclick="pointsSystem.buyItem('Рекламный брелок', 8)">Купить</button>
+                                </div>
+                                
+                                <div class="shop-item">
+                                    <div class="shop-item-info">
+                                        <h4>📝 Рекламный блокнот</h4>
+                                        <p class="shop-item-price">14 Атэелька</p>
+                                    </div>
+                                    <button class="btn btn-shop" onclick="pointsSystem.buyItem('Рекламный блокнот', 14)">Купить</button>
+                                </div>
+                                
+                                <div class="shop-item">
+                                    <div class="shop-item-info">
+                                        <h4>🏷️ Рекламный бейдж</h4>
+                                        <p class="shop-item-price">15 Атэелька</p>
+                                    </div>
+                                    <button class="btn btn-shop" onclick="pointsSystem.buyItem('Рекламный бейдж', 15)">Купить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Admin Dashboard -->
+                    <div id="adminDashboard" class="dashboard-section" style="display: none;">
+                        <div class="admin-header">
+                            <h2>Управление Атэелькой пользователей</h2>
+                            <div class="admin-actions-buttons">
+                                <button id="adminRefreshBtn" class="btn btn-primary">🔄 Обновить</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Orders Section -->
+                        <div class="orders-section">
+                            <h3>🔔 Новые заказы</h3>
+                            <div id="ordersList" class="orders-list">
+                                <!-- Orders will be populated here -->
+                            </div>
+                        </div>
+                        
+                        <div class="admin-controls">
+                            <div class="points-management">
+                                <h3>Изменить Атэельку пользователя</h3>
+                                <div class="form-group">
+                                    <label for="targetUser">Выберите пользователя:</label>
+                                    <select id="targetUser" class="form-control">
+                                        <option value="">Выберите пользователя</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pointsAction">Действие:</label>
+                                    <select id="pointsAction" class="form-control">
+                                        <option value="add">Добавить Атэельку</option>
+                                        <option value="remove">Убрать Атэельку</option>
+                                        <option value="set">Установить Атэельку</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pointsAmount">Количество Атэельки:</label>
+                                    <input type="number" id="pointsAmount" class="form-control" min="1" value="1">
+                                </div>
+                                <button id="updatePointsBtn" class="btn btn-primary">Обновить Атэельку</button>
+                            </div>
+
+                            <div class="users-list">
+                                <h3>Список пользователей</h3>
+                                <div class="users-controls">
+                                    <input type="text" id="userSearchInput" class="form-control" placeholder="Поиск по ФИО или логину...">
+                                    <div class="supervisor-controls">
+                                        <button id="supervisorCreateUserBtn" class="btn btn-primary">👤 Создать пользователя</button>
+                                        <button id="supervisorExportReportBtn" class="btn btn-success">📊 Отчет по пользователям</button>
+                                        <button id="supervisorExportOrdersReportBtn" class="btn btn-success">📋 Отчет по заказам</button>
+                                    </div>
+                                    <div class="pagination-controls">
+                                        <button id="prevPageBtn" class="btn btn-secondary">← Предыдущая</button>
+                                        <span id="pageInfo">Страница 1 из 1</span>
+                                        <button id="nextPageBtn" class="btn btn-secondary">Следующая →</button>
+                                    </div>
+                                </div>
+                                <div id="usersList" class="users-grid"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Super Admin Dashboard -->
+                    <div id="superAdminDashboard" class="dashboard-section" style="display: none;">
+                        <div class="admin-header">
+                            <h2>Управление администраторами</h2>
+                            <div class="admin-actions-buttons">
+                                <button id="superAdminRefreshBtn" class="btn btn-primary">🔄 Обновить</button>
+                            </div>
+                        </div>
+                        
+                        <div class="super-admin-controls">
+                            <div class="admin-management">
+                                <h3>Создать нового пользователя</h3>
+                                <div class="form-group">
+                                    <label for="newUserFio">ФИО:</label>
+                                    <input type="text" id="newUserFio" class="form-control" placeholder="Например: Тороп Глеб">
+                                </div>
+                                <div class="form-group">
+                                    <label for="newUsername">Логин:</label>
+                                    <input type="text" id="newUsername" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword">Пароль:</label>
+                                    <div style="display: flex; gap: 10px;">
+                                        <input type="text" id="newPassword" class="form-control" style="flex: 1;">
+                                        <button type="button" class="btn btn-secondary" onclick="pointsSystem.generatePassword('newPassword')">Сгенерировать</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newUserRole">Роль:</label>
+                                    <select id="newUserRole" class="form-control">
+                                        <option value="user">Пользователь</option>
+                                        <option value="supervisor">Супервизор</option>
+                                        <option value="superadmin">Супер Администратор</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newUserPoints">Начальная Атэелька:</label>
+                                    <input type="number" id="newUserPoints" class="form-control" min="1" value="1">
+                                </div>
+                                <div class="form-actions">
+                                    <button id="createUserBtn" class="btn btn-primary">Создать пользователя</button>
+                                </div>
+
+                            </div>
+                            </div>
+
+                            <div class="admins-list">
+                                <h3>Управление пользователями</h3>
+                                <div class="users-controls">
+                                    <input type="text" id="adminSearchInput" class="form-control" placeholder="Поиск по ФИО или логину...">
+                                    <button id="exportReportBtn" class="btn btn-success">📊 Выгрузить отчет по пользователям</button>
+                                    <button id="exportOrdersReportBtn" class="btn btn-success">📋 Выгрузить отчет по заказам</button>
+                                </div>
+                                <div id="adminsList" class="users-grid"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        
+        <!-- Edit User Modal -->
+        <div id="editUserModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Редактировать пользователя</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="editUserFio">ФИО:</label>
+                        <input type="text" id="editUserFio" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="editUsername">Логин:</label>
+                        <input type="text" id="editUsername" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="editPassword">Пароль:</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="editPassword" class="form-control" style="flex: 1;">
+                            <button type="button" class="btn btn-secondary" onclick="pointsSystem.generatePassword('editPassword')">Сгенерировать</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editUserRole">Роль:</label>
+                        <select id="editUserRole" class="form-control">
+                            <option value="user">Пользователь</option>
+                            <option value="supervisor">Супервизор</option>
+                            <option value="superadmin">Супер Администратор</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editUserPoints">Атэелька:</label>
+                        <input type="number" id="editUserPoints" class="form-control" min="1">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="saveUserChangesBtn" class="btn btn-primary">Сохранить</button>
+                    <button id="cancelEditBtn" class="btn btn-secondary">Отмена</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modern Notification Modal -->
+        <div id="notificationModal" class="modal" style="display: none;">
+            <div class="modal-content notification-modal">
+                <div class="modal-header notification-header">
+                    <span id="notificationIcon">✓</span>
+                    <h3 id="notificationTitle">Уведомление</h3>
+                    <span class="close notification-close" onclick="pointsSystem.closeNotification()">&times;</span>
+                </div>
+                <div class="modal-body notification-body">
+                    <p id="notificationMessage">Сообщение</p>
+                </div>
+                <div class="modal-footer notification-footer">
+                    <button class="btn btn-primary" onclick="pointsSystem.closeNotification()">ОК</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
