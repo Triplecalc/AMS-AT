@@ -276,12 +276,22 @@ class PointsSystem {
         }
     }
 
-    async updateOrderStatus(orderId, status) {
+    async updateOrderStatus(orderId, status, completedBy = null) {
         try {
             console.log(`Updating order ${orderId} status to ${status}`);
+            const updateData = { 
+                status: status, 
+                updated_at: new Date().toISOString() 
+            };
+            
+            // Add completed_it field if provided
+            if (completedBy) {
+                updateData.completed_it = completedBy;
+            }
+            
             const { data, error } = await window.supabaseClient
                 .from('orders')
-                .update({ status: status, updated_at: new Date().toISOString() })
+                .update(updateData)
                 .eq('id', orderId)
                 .select()
                 .single();
@@ -1120,8 +1130,11 @@ class PointsSystem {
                 return;
             }
             
-            // Update order status to fulfilled
-            await this.updateOrderStatus(orderId, 'fulfilled');
+            // Get administrator's FIO who is completing the order
+            const adminFio = this.currentUser.fio || this.currentUser.username;
+            
+            // Update order status to fulfilled with administrator's FIO
+            await this.updateOrderStatus(orderId, 'fulfilled', adminFio);
             
             // Reload orders list to remove fulfilled order
             await this.loadOrders();
@@ -1202,6 +1215,7 @@ class PointsSystem {
                 'Товар': order.product || 'Неизвестный товар',
                 'Стоимость': order.cost + ' Атээлька',
                 'Статус': order.status === 'pending' ? 'Ожидает' : 'Выполнен',
+                'Выдал заказ': order.completed_it || (order.status === 'fulfilled' ? 'Не указан' : ''),
                 'Дата заказа': new Date(order.created_at).toLocaleString('ru-RU'),
                 'Дата обновления': order.updated_at ? new Date(order.updated_at).toLocaleString('ru-RU') : 'Не обновлялся'
             }));
