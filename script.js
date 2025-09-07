@@ -109,7 +109,7 @@ class PointsSystem {
             if (!admin) {
                 await this.createUser({
                     username: 'admin',
-                    password: '1234',
+                    password: '1234567887654321',
                     fio: 'Тороп Глеб',
                     role: 'superadmin',
                     points: 1,
@@ -1259,3 +1259,4 @@ class PointsSystem {
 
 // Initialize the application
 const pointsSystem = new PointsSystem();
+
